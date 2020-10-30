@@ -83,4 +83,23 @@ def alt_iterate():
     plt.show()
 
 
-alt_iterate()
+def color_iterate():
+    points, colors = iterate_corners()
+    colors_value = []
+
+    for i in range(len(colors)):
+        if colors[i] == 0:
+            colors_value.append("red")
+        elif colors[i] == 1:
+            colors_value.append("green")
+        else:
+            colors_value.append("blue")
+
+    # plt.scatter(red, color="r")
+    # plt.scatter(green, color="green")
+    # plt.scatter(blue, color="blue")
+    plt.scatter(*zip(*points), s=0.1, c=colors_value, marker=".")
+    plt.show()
+
+
+color_iterate()
