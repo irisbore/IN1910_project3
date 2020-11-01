@@ -42,7 +42,7 @@ def iterate_corners():
     """
     Docstring
     """
-    points = np.zeros()
+    points = []
     colors = np.zeros(10000)
     x_i = get_random_point()
     random_corner = np.random.randint(0, 3)
@@ -54,7 +54,7 @@ def iterate_corners():
     for i in range(10000):
         random_corner = np.random.randint(0, 3)
         x_i = (x_i + corners[random_corner]) / 2
-        points[i] = x_i
+        points.append(x_i)
         colors[i] = random_corner
 
     return points, colors
@@ -66,10 +66,24 @@ def plot_points(points):
     plt.show()
 
 
-# plot_points(iterate_corners[0])
+def alt_iterate():
+    points, colors = iterate_corners()
+    n = len(colors)
+    # red = X[colors == 0]
+    # green = X[colors == 1]
+    # blue = X[colors == 2]
+    color = "b"
+    for i in range(n):
+        if colors[i] == 0:
+            plt.scatter(points[i][0], points[i][1], color="r")
+        elif colors[i] == 1:
+            plt.scatter(points[i][0], points[i][1], color="g")
+        else:
+            plt.scatter(points[i][0], points[i][1], color="b")
+    plt.show()
 
 
-def color_iterate():
+def color_iterate2():
     points, colors = iterate_corners()
     colors_value = []
 
@@ -81,19 +95,25 @@ def color_iterate():
         else:
             colors_value.append("blue")
 
-    # plt.scatter(*zip(*points), s=0.1, c=colors_value, marker=".")
-    red = points[colors == 0]
-    print(red[100])
-    green = points[colors == 1]
-    blue = points[colors == 2]
-    plt.scatter(red[0], red[1], color="r")
-    plt.scatter(green, color="green")
-    plt.scatter(blue, color="blue")
+    # plot tre ganger
+
+    # plt.scatter(red, color="r")
+    # plt.scatter(green, color="green")
+    # plt.scatter(blue, color="blue")
+    plt.scatter(*zip(*points), s=0.1, c=colors_value, marker=".")
     plt.show()
 
 
-color_iterate()
+def color_iterate():
+    points, colors = iterate_corners()
 
-# colors = np.zeros(N, 3)
+    red = np.where(colors == 0)[0]
+    green = np.where(colors == 1)[0]
+    blue = np.where(colors == 2)[0]
 
-# plt.scatter(*zip(*X), c=colors, s=0.2)
+    plt.scatter(*zip(*points), s=0.1, c="red", marker=".")
+
+    plt.show()
+
+
+color_iterate2()
