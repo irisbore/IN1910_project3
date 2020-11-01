@@ -115,5 +115,4 @@ def color_iterate():
 
     plt.show()
 
-
 color_iterate2()
