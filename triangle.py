@@ -42,7 +42,7 @@ def iterate_corners():
     """
     Docstring
     """
-    points = []
+    points = np.zeros((10000, 2))  # sett til riktig shape
     colors = np.zeros(10000)
     x_i = get_random_point()
     random_corner = np.random.randint(0, 3)
@@ -54,7 +54,7 @@ def iterate_corners():
     for i in range(10000):
         random_corner = np.random.randint(0, 3)
         x_i = (x_i + corners[random_corner]) / 2
-        points.append(x_i)
+        points[i] = x_i
         colors[i] = random_corner
 
     return points, colors
@@ -72,7 +72,6 @@ def alt_iterate():
     # red = X[colors == 0]
     # green = X[colors == 1]
     # blue = X[colors == 2]
-    color = "b"
     for i in range(n):
         if colors[i] == 0:
             plt.scatter(points[i][0], points[i][1], color="r")
@@ -107,12 +106,19 @@ def color_iterate2():
 def color_iterate():
     points, colors = iterate_corners()
 
-    red = np.where(colors == 0)[0]
-    green = np.where(colors == 1)[0]
-    blue = np.where(colors == 2)[0]
+    red = points[colors == 0]
+    green = points[colors == 1]
+    blue = points[colors == 2]
 
-    plt.scatter(*zip(*points), s=0.1, c="red", marker=".")
+    color_translate = {"red": red, "green": green, "blue": blue}
+
+    print(red)
+
+    plt.scatter(*zip(*red), s=0.1, c="red", marker=".")
+    plt.scatter(*zip(*green), s=0.1, c="green", marker=".")
+    plt.scatter(*zip(*blue), s=0.1, c="blue", marker=".")
 
     plt.show()
 
-color_iterate2()
+
+color_iterate()
