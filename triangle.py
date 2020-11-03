@@ -19,9 +19,15 @@ def get_random_point():
         ----------
     """
     weights = np.zeros(3)
-    weights = np.array([np.random.random(), np.random.random(), np.random.random()])
+    weights = np.random.random(3)
     weights = weights / np.sum(weights)
-    return weights[1] * corners[1] + weights[2] * corners[2]
+    x_0 = weights * corners[:, 0]
+    y_0 = weights * corners[:, 1]
+    X_0 = (x_0, y_0)
+    return X_0
+
+
+get_random_point()
 
 
 def draw_points():
