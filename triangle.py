@@ -18,11 +18,10 @@ def get_random_point():
 
         ----------
     """
-    weights = np.zeros(3)
     weights = np.random.random(3)
     weights = weights / np.sum(weights)
-    x_0 = weights * corners[:, 0]
-    y_0 = weights * corners[:, 1]
+    x_0 = weights @ corners[:, 0]
+    y_0 = weights @ corners[:, 1]
     X_0 = (x_0, y_0)
     return X_0
 
@@ -101,7 +100,6 @@ def color_iterate2():
             colors_value.append("blue")
 
     # plot tre ganger
-
     # plt.scatter(red, color="r")
     # plt.scatter(green, color="green")
     # plt.scatter(blue, color="blue")
@@ -117,8 +115,6 @@ def color_iterate():
     blue = points[colors == 2]
 
     color_translate = {"red": red, "green": green, "blue": blue}
-
-    print(red)
 
     plt.scatter(*zip(*red), s=0.1, c="red", marker=".")
     plt.scatter(*zip(*green), s=0.1, c="green", marker=".")
