@@ -11,7 +11,7 @@ class ChaosGame:
         assert 0 < r < 1, "radius needs to be between 0 and 1"
         self.n = n
         self.r = r
-        _generate_ngon()
+        self._generate_ngon(n)
         # kanskje raise mer error her
 
     def __call__(self):
