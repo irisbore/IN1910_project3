@@ -19,49 +19,74 @@ class ChaosGame:
 
     def _generate_ngon(self, n):
         angles = np.linspace(0, 2 * np.pi, n, endpoint=False)
-        self.corners = [(np.sin(angle), np.cos(angle)) for angle in angles]
+        self.corners = np.array([(np.sin(angle), np.cos(angle)) for angle in angles])
 
     def plot_ngon(self):
         plt.scatter(*zip(*self.corners), s=1, c="red")
         plt.show()
 
     def _starting_point(self):
-        random_angle = np.random.random(self.n)
-        random_angle = random_angle / np.sum(random_angle)
-        random_x = np.random.choice((-1, 1)) * (abs(np.sin(random_angle)) - self.r)
-        random_y = np.random.choice((-1, 1)) * (abs(np.cos(random_angle)) - self.r)
-        return (random_x, random_y)
+        weights = np.random.random(size=self.n)
+        weights = weights / np.sum(weights)
+        X_0 = np.zeros(2)
+        X_0[0] = weights @ self.corners[:, 0]
+        X_0[1] = weights @ self.corners[:, 1]
+        # random_x = np.random.choice((-1, 1)) * (abs(np.sin(random_angle)) - self.r)
+        # random_y = np.random.choice((-1, 1)) * (abs(np.cos(random_angle)) - self.r)
+        return X_0
 
     def iterate(self, steps, discard=5):
         x_i = self._starting_point()
-        points = []
-        indices = []
+        self.points = []
+        self.indices = []
         for i in range(discard):
             index = np.random.randint(self.n)
             x_i = self.r * x_i + (1 - self.r) * self.corners[index]
         for i in range(steps):
             index = np.random.randint(self.n)
-            c_j = np.random.choice(self.corners)
             x_i = self.r * x_i + (1 - self.r) * self.corners[index]
-            points.append(x_i)
-            indices.append(index)
+            self.points.append(x_i)
+            self.indices.append(index)
 
-            # evt bruk "jet" for cmap
+    def plot(self, color=False, cmap="jet"):
+        if color == True:
+            colors = self.gradient_color
+        else:
+            colors = "black"
 
-    def plot(color=False, cmap="BrBG"):
-        return 0
+        plt.scatter(*zip(*self.points), c=colors, cmap=cmap)
+        plt.axis("equal")
 
-    # Lag property @
+    def show(self, color=False, cmap="jet"):
+        self.plot(color=color, cmap=cmap)
+        plt.show()
 
-    def savepng(outfile, color=False, cmap="jet"):
-        # plt.savefig()
-        return 0
+    @property
+    def gradient_color(self):
+        # Nytt forsøk
+        c = [self.indices[0]]
+        for i in range(1, len(self.indices)):
+            c.append((c[-1] + self.indices[i]) / 2)
+        return c
+
+    def savepng(self, outfile, color=False, cmap="jet"):
+        newfile = outfile.split(".")
+        if len(newfile) == 1:
+            outfile = f"{outfile}.png"
+            plt.savefig(outfile, dpi=300)
+
+        if outfile.endswith(".png"):
+            outfile = outfile
+            plt.savefig(outfile, dpi=300)
+        else:
+            raise NameError("Filename must be a .png ")
 
 
 if __name__ == "__main__":
-    c = ChaosGame(5)
-    c._starting_point()
-    c.iterate(1)
+    c = ChaosGame(5, r=1 / 3)
+    c.iterate(10000)
+    c.show(color=True)
+    c.savepng("outfile")
     # points = np.zeros((1000, 2))
 
     # for i in range(1000):
