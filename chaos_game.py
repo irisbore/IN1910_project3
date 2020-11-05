@@ -14,9 +14,6 @@ class ChaosGame:
         self._generate_ngon(n)
         # kanskje raise mer error her
 
-    def __call__(self):
-        pass
-
     def _generate_ngon(self, n):
         angles = np.linspace(0, 2 * np.pi, n, endpoint=False)
         self.corners = np.array([(np.sin(angle), np.cos(angle)) for angle in angles])
@@ -87,10 +84,3 @@ if __name__ == "__main__":
     c.iterate(10000)
     c.show(color=True)
     c.savepng("outfile")
-    # points = np.zeros((1000, 2))
-
-    # for i in range(1000):
-    #     points[i] = _starting_point()
-
-    # plt.scatter(*zip(*points))
-    # plt.show()

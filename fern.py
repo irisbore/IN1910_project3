@@ -19,7 +19,6 @@ class AffineTransform:
         return M @ X + c
 
     def cumulative(self):
-
         functions = [f1,f2,f3,f4]
         probs = [0.01, 0.85, 0.07, 0.07]
         probs = probs / sum(probs)
