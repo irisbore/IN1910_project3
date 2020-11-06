@@ -1,16 +1,30 @@
-# Write four unit_tests()
 import pytest
 import chaos_game.py
 
 
-def test_iterate():
+"""Check if distance from starting points to every single corner doesn't exceed some distance """
+
+
+def test_starting_point():
     pass
 
 
-"Limt inn fra gammelt av:"
-"Bør vi ha repr?"
+"""Check assert with pytest"""
 
 
-def test_repr():
-    u = Vector3D(0, 4, -2)
-    assert repr(u) == "Vector3D(0, 4, -2)"
+def test_assert():
+    pass
+
+
+"""Check if savepng raises NameError"""
+
+
+def test_savepng():
+    pass
+
+
+"""Check if _generate_ngon(n) is in __init__"""
+
+
+def test_init():
+    pass
