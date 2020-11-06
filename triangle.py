@@ -2,10 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 corners = np.array([(0, 0), (1, 0), (0.5, np.sqrt(3 / 4))])
-plt.scatter(*zip(*corners))
-# plt.show()
-# plt.figure()
-
 
 def get_random_point():
     """
@@ -85,8 +81,6 @@ def color_iterate():
     green = points[colors == 1]
     blue = points[colors == 2]
 
-    color_translate = {"red": red, "green": green, "blue": blue}
-
     plt.scatter(*zip(*red), s=0.1, c="red", marker=".")
     plt.scatter(*zip(*green), s=0.1, c="green", marker=".")
     plt.scatter(*zip(*blue), s=0.1, c="blue", marker=".")
@@ -155,8 +149,10 @@ def alternative_colors():
         colors[i] = x_color
 
     for p, c in zip(points, colors):
-        plt.scatter(p[0], p[1], c=c)
+        plt.scatter(p[0], p[1], c=[c])
     plt.show()
 
 
-alternative_colors()
+if __name__ == "__main__":
+    plt.scatter(*zip(*corners))
+    alternative_colors()
