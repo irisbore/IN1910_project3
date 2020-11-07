@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import triangle
+import chaos_game
 
 
 class Variations:
@@ -59,8 +60,27 @@ class Variations:
     def cross(x, y):
         return np.sqrt(1 / (x ** 2 - y ** 2) ** 2) * (x, y)
 
+    @classmethod
+    def from_chaos_game(self, chaos_instance, method):
+        chaos_instance.iterate(10000)
+        tx = np.take(chaos_instance.points, 0, axis=1)
+        ty = np.take(chaos_instance.points, 1, axis=1)
+        t = Variations(tx, ty, method)
+        t.transform()
+        return t
 
-def plot_2_transformations_triangle():
+
+def linear_combination_wrap(var1, var2, w=0.5):
+    assert 0.0 <= w <= 1
+    x = w * var1.x + (1 - w) * var2.x
+    y = w * var1.y + (1 - w) * var2.y
+
+    plt.scatter(x, y)
+    plt.show()
+    return
+
+
+def plot_transformations_triangle():
     points, _ = triangle.iterate_corners()
     swirl = Variations(points[:, 0], points[:, 1], "swirl")
     swirl.transform()
@@ -111,6 +131,25 @@ def transform_grid():
     plt.show()
 
 
+def plot_transformations_chaos_game():
+    c = chaos_game.ChaosGame(4, 1 / 3)
+    linear = Variations.from_chaos_game(c, "linear")
+    handkerchief = Variations.from_chaos_game(c, "handkerchief")
+    swirl = Variations.from_chaos_game(c, "swirl")
+    disc = Variations.from_chaos_game(c, "disc")
+
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
+    fig.suptitle("transformations on chaos game")
+
+    ax1.scatter(linear.x, -linear.y, s=0.1, color="blue")
+    ax2.scatter(handkerchief.x, -handkerchief.y, s=0.1, color="teal")
+    ax3.scatter(swirl.x, -swirl.y, s=0.1, color="orange")
+    ax4.scatter(disc.x, -disc.y, s=0.1, c="purple")
+
+    plt.show()
+
+
 if __name__ == "__main__":
-    plot_2_transformations_triangle()
-    transform_grid()
+    # plot_transformations_triangle()
+    # transform_grid()
+    plot_transformations_chaos_game()
