@@ -12,7 +12,6 @@ class ChaosGame:
         self.n = n
         self.r = r
         self._generate_ngon(n)
-        # kanskje raise mer error her
 
     def _generate_ngon(self, n):
         angles = np.linspace(0, 2 * np.pi, n, endpoint=False)
@@ -28,8 +27,6 @@ class ChaosGame:
         X_0 = np.zeros(2)
         X_0[0] = weights @ self.corners[:, 0]
         X_0[1] = weights @ self.corners[:, 1]
-        # random_x = np.random.choice((-1, 1)) * (abs(np.sin(random_angle)) - self.r)
-        # random_y = np.random.choice((-1, 1)) * (abs(np.cos(random_angle)) - self.r)
         return X_0
 
     def iterate(self, steps, discard=5):
@@ -83,4 +80,4 @@ if __name__ == "__main__":
     c = ChaosGame(5, r=1 / 3)
     c.iterate(10000)
     c.show(color=True)
-    c.savepng("outfile")
+    # c.savepng("outfile")
