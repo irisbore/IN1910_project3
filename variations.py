@@ -71,13 +71,12 @@ class Variations:
 
 
 def linear_combination_wrap(var1, var2, w=0.5):
-    assert 0.0 <= w <= 1
+    assert 0.0 <= w <= 1.0
     x = w * var1.x + (1 - w) * var2.x
     y = w * var1.y + (1 - w) * var2.y
-
-    plt.scatter(x, y)
+    result = Variations(x, y, "linear")
+    result.plot()
     plt.show()
-    return
 
 
 def plot_transformations_triangle():
@@ -152,4 +151,8 @@ def plot_transformations_chaos_game():
 if __name__ == "__main__":
     # plot_transformations_triangle()
     # transform_grid()
-    plot_transformations_chaos_game()
+    # plot_transformations_chaos_game()
+    c = chaos_game.ChaosGame(3, 1 / 2)
+    swirl = Variations.from_chaos_game(c, "swirl")
+    disc = Variations.from_chaos_game(c, "eyefish")
+    linear_combination_wrap(swirl, disc, w=0)
