@@ -49,6 +49,8 @@ def plot(f1, f2, f3, f4):
     x = iterate(f1, f2, f3, f4)
     plt.scatter(*zip(*x), c="forestgreen", s=0.1)
     plt.axis("equal")
+    plt.xlabel("x")
+    plt.ylabel("y")
     plt.savefig("barnsley_fern.png")
 
 

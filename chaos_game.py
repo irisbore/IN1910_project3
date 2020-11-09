@@ -57,7 +57,6 @@ class ChaosGame:
 
     @property
     def gradient_color(self):
-        # Nytt forsøk
         c = [self.indices[0]]
         for i in range(1, len(self.indices)):
             c.append((c[-1] + self.indices[i]) / 2)
