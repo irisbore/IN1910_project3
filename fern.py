@@ -12,6 +12,20 @@ class AffineTransform:
         self.f = f
 
     def __call__(self, x, y):
+        """
+        Returns the point resulting from the transform
+
+        ...
+        Parameters
+        ----------
+        x : int or float
+        y : int or float
+            point
+
+        Returns
+        -------
+        float
+        """
         M = np.matrix([[self.a, self.b], [self.c, self.d]])
         X = np.matrix([[x, y]]).T
         c = np.matrix([self.e, self.f]).T
@@ -28,6 +42,21 @@ def scale(probs):
 
 
 def cumulative(f1, f2, f3, f4):
+    """
+    Draws function at random
+
+    ...
+    Parameters
+    ----------
+    f1 : object
+    f2 : object
+    f3 : object
+    f4 : object
+
+    Returns
+    -------
+    object
+    """
     probs = scale([0.01, 0.85, 0.07, 0.07])
     functions = [f1, f2, f3, f4]
     r = np.random.random()
@@ -37,6 +66,23 @@ def cumulative(f1, f2, f3, f4):
 
 
 def iterate(f1, f2, f3, f4):
+    """
+    iterate new points by first picking function at random, then computing
+
+    ...
+    Parameters
+    ----------
+    f1 : object
+    f2 : object
+    f3 : object
+    f4 : object
+
+    Returns
+    -------
+    list
+        generated points
+
+    """
     x0 = [0, 0]
     x = [x0]
     for i in range(50000):
