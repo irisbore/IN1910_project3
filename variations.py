@@ -6,30 +6,52 @@ import chaos_game
 
 class Variations:
     def __init__(self, x, y, name):
+        """
+        Construct Variations class with transform function
+
+        input :
+        x,y - lists of corresponding coordinates
+        name - name of the transformation
+        """
         self.x = x
         self.y = y
         self.name = name
         self._func = getattr(Variations, name)
 
     def transform(self):
+        """
+        Applies transformation
+        """
         self.x, self.y = self._func(self.x, self.y)
         return self.x, self.y
 
     def plot(self, cmap="jet"):
+        """
+        Plots a class object from properties
+        """
         plt.scatter(self.x, self.y, cmap=cmap)
 
     @staticmethod
     def linear(x, y):
+        """
+        Does nothing
+        """
         return x, y
 
     @staticmethod
     def handkerchief(x, y):
+        """
+        Applies a handkerchief transformation to x,y-lists of coordinates
+        """
         r = np.sqrt(x ** 2 + y ** 2)
         theta = np.arctan(x, y)
         return r * (np.sin(theta + r), np.cos(theta - r))
 
     @staticmethod
     def swirl(x, y):
+        """
+        Applies a swirl transformation to x,y-lists of coordinates
+        """
         r = np.sqrt(x ** 2 + y ** 2)
         return (
             x * np.sin(r ** 2) - y * np.cos(r ** 2),
@@ -38,30 +60,49 @@ class Variations:
 
     @staticmethod
     def disc(x, y):
+        """
+        Applies a disc transformation to x,y-lists of coordinates
+        """
         r = np.sqrt(x ** 2 + y ** 2)
         theta = np.arctan(x, y)
         return theta / np.pi * (np.sin(np.pi * r), np.cos(np.pi * r))
 
     @staticmethod
     def fisheye(x, y):
+        """
+        Applies a fisheye transformation to x,y-lists of coordinates
+        """
         r = np.sqrt(x ** 2 + y ** 2)
         return 2 / (r + 1) * (y, x)
 
     @staticmethod
     def eyefish(x, y):
+        """
+        Applies a eyefish transformation to x,y-lists of coordinates
+        """
         r = np.sqrt(x ** 2 + y ** 2)
         return 2 / (r + 1) * (x, y)
 
     @staticmethod
     def tangent(x, y):
+        """
+        Applies a tanget transformation to x,y-lists of coordinates
+        """
         return (np.sin(x) / np.cos(y), np.tan(y))
 
     @staticmethod
     def cross(x, y):
+        """
+        Applies a cross transformation to x,y-lists of coordinates.
+        """
         return np.sqrt(1 / (x ** 2 - y ** 2) ** 2) * (x, y)
 
     @classmethod
     def from_chaos_game(self, chaos_instance, method):
+        """
+        Converts an instance of the chaos game class to an instance of the Variations
+        class, transforms it and returns the new Variations class instance.
+        """
         chaos_instance.iterate(10000)
         tx = np.take(chaos_instance.points, 0, axis=1)
         ty = np.take(chaos_instance.points, 1, axis=1)
@@ -71,6 +112,11 @@ class Variations:
 
 
 def linear_combination_wrap(var1, var2, w=0.5):
+    """
+    Combines two transformations with a weight to scale them.
+    higher w gives more of var1 transformation.
+    0 <= w <= 1
+    """
     assert 0.0 <= w <= 1.0
     x = w * var1.x + (1 - w) * var2.x
     y = w * var1.y + (1 - w) * var2.y
@@ -80,6 +126,9 @@ def linear_combination_wrap(var1, var2, w=0.5):
 
 
 def plot_transformations_triangle():
+    """
+    Applies transformations to the triangle class to see its working.
+    """
     points, _ = triangle.iterate_corners()
     swirl = Variations(points[:, 0], points[:, 1], "swirl")
     swirl.transform()
@@ -98,6 +147,10 @@ def plot_transformations_triangle():
 
 
 def transform_grid():
+    """
+    Applies four transformations to a grid structure
+    and plots them to give an intuition of the effect each has.
+    """
     N = 80
     grid_values = np.linspace(-1, 1, N)
     x, y = np.meshgrid(grid_values, grid_values)
@@ -131,6 +184,9 @@ def transform_grid():
 
 
 def plot_transformations_chaos_game():
+    """
+    Plots four transformations on a chaos game instance
+    """
     c = chaos_game.ChaosGame(4, 1 / 3)
     linear = Variations.from_chaos_game(c, "linear")
     handkerchief = Variations.from_chaos_game(c, "handkerchief")
@@ -150,7 +206,7 @@ def plot_transformations_chaos_game():
 
 if __name__ == "__main__":
     # plot_transformations_triangle()
-    # transform_grid()
+    transform_grid()
     # plot_transformations_chaos_game()
     c = chaos_game.ChaosGame(3, 1 / 2)
     swirl = Variations.from_chaos_game(c, "swirl")
