@@ -114,7 +114,7 @@ def save_figures():
     for n, r, name in zip(corners, radii, names):
         c = ChaosGame(n, r)
         c.iterate(10000)
-        c.show()
+        c.show(color=True)
         c.savepng(f"{name}", color=True)
         plt.clf()
 
