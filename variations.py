@@ -196,7 +196,7 @@ def plot_transformations_chaos_game():
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
     fig.suptitle("transformations on chaos game")
 
-    ax1.scatter(linear.x, -linear.y, s=0.1, c=c.gradient_color, cmap="jet")
+    ax1.scatter(linear.x, -linear.y, s=0.1, c=c.gradient_color)
     ax2.scatter(handkerchief.x, -handkerchief.y, s=0.1, c=c.gradient_color)
     ax3.scatter(swirl.x, -swirl.y, s=0.1, c=c.gradient_color)
     ax4.scatter(disc.x, -disc.y, s=0.1, c=c.gradient_color)
@@ -212,7 +212,7 @@ def plot_transformations_chaos_game():
 if __name__ == "__main__":
     # plot_transformations_triangle()
     # transform_grid()
-    # plot_transformations_chaos_game()
+    plot_transformations_chaos_game()
     c = chaos_game.ChaosGame(3, 1 / 2)
     swirl = Variations.from_chaos_game(c, "swirl")
     disc = Variations.from_chaos_game(c, "eyefish")

@@ -106,8 +106,22 @@ class ChaosGame:
             raise NameError("Filename must be a .png ")
 
 
+def save_figures():
+    corners = [3, 4, 5, 5, 6]
+    radii = [1 / 2, 1 / 3, 1 / 3, 3 / 8, 1 / 3]
+    names = ["fig1", "fig2", "fig3", "fig4", "fig5"]
+
+    for n, r, name in zip(corners, radii, names):
+        c = ChaosGame(n, r)
+        c.iterate(10000)
+        c.show()
+        c.savepng(f"{name}", color=True)
+        plt.clf()
+
+
 if __name__ == "__main__":
     c = ChaosGame(n=3, r=1 / 2)
     c.iterate(10000)
-    c.show(color=True)
-    c.savepng("chaos1", color=True)
+    # c.show(color=True)
+    # c.savepng("chaos1", color=True)
+    save_figures()
