@@ -44,7 +44,7 @@ class Variations:
         Applies a handkerchief transformation to x,y-lists of coordinates
         """
         r = np.sqrt(x ** 2 + y ** 2)
-        theta = np.arctan(x, y)
+        theta = np.arctan2(x, y)
         return r * (np.sin(theta + r), np.cos(theta - r))
 
     @staticmethod
@@ -64,7 +64,7 @@ class Variations:
         Applies a disc transformation to x,y-lists of coordinates
         """
         r = np.sqrt(x ** 2 + y ** 2)
-        theta = np.arctan(x, y)
+        theta = np.arctan2(x, y)
         return theta / np.pi * (np.sin(np.pi * r), np.cos(np.pi * r))
 
     @staticmethod
@@ -196,17 +196,22 @@ def plot_transformations_chaos_game():
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
     fig.suptitle("transformations on chaos game")
 
-    ax1.scatter(linear.x, -linear.y, s=0.1, color="blue")
-    ax2.scatter(handkerchief.x, -handkerchief.y, s=0.1, color="teal")
-    ax3.scatter(swirl.x, -swirl.y, s=0.1, color="orange")
-    ax4.scatter(disc.x, -disc.y, s=0.1, c="purple")
+    ax1.scatter(linear.x, -linear.y, s=0.1, c=c.gradient_color, cmap="jet")
+    ax2.scatter(handkerchief.x, -handkerchief.y, s=0.1, c=c.gradient_color)
+    ax3.scatter(swirl.x, -swirl.y, s=0.1, c=c.gradient_color)
+    ax4.scatter(disc.x, -disc.y, s=0.1, c=c.gradient_color)
+
+    ax1.axis("off")
+    ax2.axis("off")
+    ax3.axis("off")
+    ax4.axis("off")
 
     plt.show()
 
 
 if __name__ == "__main__":
     # plot_transformations_triangle()
-    transform_grid()
+    # transform_grid()
     # plot_transformations_chaos_game()
     c = chaos_game.ChaosGame(3, 1 / 2)
     swirl = Variations.from_chaos_game(c, "swirl")
