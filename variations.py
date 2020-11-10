@@ -13,6 +13,7 @@ class Variations:
         x,y - lists of points
         name - name of the transformation
     """
+
     def __init__(self, x, y, name):
         """
         Construct Variations class with transform function
@@ -123,7 +124,6 @@ def linear_combination_wrap(var1, var2, w=0.5):
     """
     Combines two transformations with a weight to scale them.
     higher w gives more of var1 transformation.
-    0 <= w <= 1
     """
     assert 0.0 <= w <= 1.0
     x = w * var1.x + (1 - w) * var2.x
@@ -219,9 +219,9 @@ def plot_transformations_chaos_game():
 
 if __name__ == "__main__":
     # plot_transformations_triangle()
-    # transform_grid()
-    # plot_transformations_chaos_game()
+    transform_grid()
+    plot_transformations_chaos_game()
     # c = chaos_game.ChaosGame(3, 1 / 2)
     # swirl = Variations.from_chaos_game(c, "swirl")
     # disc = Variations.from_chaos_game(c, "eyefish")
-    # linear_combination_wrap(swirl, disc, w=0)
+    linear_combination_wrap(swirl, disc, w=0)

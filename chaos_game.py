@@ -121,6 +121,7 @@ def save_figures():
 
 
 if __name__ == "__main__":
+    pass
     # c = ChaosGame(n=3, r=1 / 2)
     # c.iterate(10000)
     # c.show(color=True)
