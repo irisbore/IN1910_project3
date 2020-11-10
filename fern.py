@@ -3,6 +3,19 @@ import matplotlib.pyplot as plt
 
 
 class AffineTransform:
+    """
+      Class that represents an AffineTransform
+
+    Parameters
+    ----------
+    a, b, c, d, e, f : int or float, optional
+            coefficient
+            default to zero
+
+    ----------
+
+    """
+
     def __init__(self, a=0, b=0, c=0, d=0, e=0, f=0):
         self.a = a
         self.b = b
@@ -35,6 +48,17 @@ class AffineTransform:
 
 
 def scale(probs):
+    """
+    Scales list
+
+    ...
+    Parameters
+    ----------
+    probs: list
+    Returns
+    -------
+    list
+    """
     assert sum(probs) == 1, "sum of input must be 1"
     for i in range(1, len(probs)):
         probs[i] = probs[i] + probs[i - 1]
@@ -92,6 +116,22 @@ def iterate(f1, f2, f3, f4):
 
 
 def plot(f1, f2, f3, f4):
+    """
+    plots iterated points
+
+    ...
+    Parameters
+    ----------
+    f1 : object
+    f2 : object
+    f3 : object
+    f4 : object
+
+    Returns
+    -------
+    nothing
+
+    """
     x = iterate(f1, f2, f3, f4)
     plt.scatter(*zip(*x), c="forestgreen", s=0.1)
     plt.axis("equal")
