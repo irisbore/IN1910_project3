@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 corners = np.array([(0, 0), (1, 0), (0.5, np.sqrt(3 / 4))])
 
+
 def get_random_point():
     """
     Assigns each weight a random value between 0 and 1.
@@ -75,6 +76,12 @@ def plot_points(points):
 
 
 def color_iterate():
+    """
+    sorts the points into three lists based on which corner was used to compute them.
+    Plots the three lists with a separate color.
+    Returns
+        void
+    """
     points, colors = iterate_corners()
 
     red = points[colors == 0]
