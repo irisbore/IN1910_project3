@@ -5,6 +5,16 @@ from matplotlib import cm
 
 class ChaosGame:
     def __init__(self, n, r=1 / 2):
+        """
+        Calls _generate_ngon(n)
+
+        Parameters
+        ----------
+        n : int
+        r : float
+
+
+        """
         assert isinstance(n, int), "n has to be an integer"
         assert isinstance(r, float), "r has to be a float"
         assert n > 2, "n must be larger than two"
@@ -14,6 +24,17 @@ class ChaosGame:
         self._generate_ngon(n)
 
     def _generate_ngon(self, n):
+        """
+        Parameters
+        ----------
+        n : int
+            number of corners in polygon
+        Returns
+        -------
+        list
+            corners
+
+        """
         angles = np.linspace(0, 2 * np.pi, n, endpoint=False)
         self.corners = np.array([(np.sin(angle), np.cos(angle)) for angle in angles])
 
@@ -22,6 +43,17 @@ class ChaosGame:
         plt.show()
 
     def _starting_point(self):
+        """
+        Parameters
+        ----------
+        n : int
+            number of corners in polygon
+        Returns
+        -------
+        list
+            corners
+
+        """
         weights = np.random.random(size=self.n)
         weights = weights / np.sum(weights)
         X_0 = np.zeros(2)
@@ -57,6 +89,7 @@ class ChaosGame:
 
     @property
     def gradient_color(self):
+        """Property"""
         c = [self.indices[0]]
         for i in range(1, len(self.indices)):
             c.append((c[-1] + self.indices[i]) / 2)
