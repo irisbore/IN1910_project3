@@ -109,13 +109,13 @@ class ChaosGame:
 def save_figures():
     corners = [3, 4, 5, 5, 6]
     radii = [1 / 2, 1 / 3, 1 / 3, 3 / 8, 1 / 3]
-    names = ["fig1", "fig2", "fig3", "fig4", "fig5"]
+    names = ["1", "2", "3", "4", "5"]
 
     for n, r, name in zip(corners, radii, names):
         c = ChaosGame(n, r)
         c.iterate(10000)
         c.show(color=True)
-        c.savepng(f"{name}", color=True)
+        c.savepng(f"figures/chaos{name}", color=True)
         plt.clf()
 
 
