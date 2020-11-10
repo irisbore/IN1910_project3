@@ -95,42 +95,6 @@ def color_iterate():
     plt.show()
 
 
-# def alt_iterate():
-#     points, colors = iterate_corners()
-#     n = len(colors)
-#     # red = X[colors == 0]
-#     # green = X[colors == 1]
-#     # blue = X[colors == 2]
-#     for i in range(n):
-#         if colors[i] == 0:
-#             plt.scatter(points[i][0], points[i][1], color="r")
-#         elif colors[i] == 1:
-#             plt.scatter(points[i][0], points[i][1], color="g")
-#         else:
-#             plt.scatter(points[i][0], points[i][1], color="b")
-#     plt.show()
-
-
-# def color_iterate2():
-#     points, colors = iterate_corners()
-#     colors_value = []
-
-#     for i in range(len(colors)):
-#         if colors[i] == 0:
-#             colors_value.append("red")
-#         elif colors[i] == 1:
-#             colors_value.append("green")
-#         else:
-#             colors_value.append("blue")
-
-#     # plot tre ganger
-#     # plt.scatter(red, color="r")
-#     # plt.scatter(green, color="green")
-#     # plt.scatter(blue, color="blue")
-#     plt.scatter(*zip(*points), s=0.1, c=colors_value, marker=".")
-#     plt.show()
-
-
 def alternative_colors():
     """
     Plots 1000 points inside a triangle with colors in

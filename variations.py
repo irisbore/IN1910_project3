@@ -212,8 +212,8 @@ def plot_transformations_chaos_game():
 if __name__ == "__main__":
     # plot_transformations_triangle()
     # transform_grid()
-    plot_transformations_chaos_game()
-    c = chaos_game.ChaosGame(3, 1 / 2)
-    swirl = Variations.from_chaos_game(c, "swirl")
-    disc = Variations.from_chaos_game(c, "eyefish")
-    linear_combination_wrap(swirl, disc, w=0)
+    # plot_transformations_chaos_game()
+    # c = chaos_game.ChaosGame(3, 1 / 2)
+    # swirl = Variations.from_chaos_game(c, "swirl")
+    # disc = Variations.from_chaos_game(c, "eyefish")
+    # linear_combination_wrap(swirl, disc, w=0)

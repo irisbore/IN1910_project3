@@ -82,6 +82,7 @@ class ChaosGame:
         plt.axis("equal")
 
     def show(self, color=False, cmap="jet"):
+        assert getattr(self, "points"), "you need to call iterate"
         self.plot(color=color, cmap=cmap)
         # plt.show()
 
@@ -120,8 +121,8 @@ def save_figures():
 
 
 if __name__ == "__main__":
-    c = ChaosGame(n=3, r=1 / 2)
-    c.iterate(10000)
+    # c = ChaosGame(n=3, r=1 / 2)
+    # c.iterate(10000)
     # c.show(color=True)
     # c.savepng("chaos1", color=True)
-    save_figures()
+    # save_figures()
