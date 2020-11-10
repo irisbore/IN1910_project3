@@ -5,6 +5,14 @@ import chaos_game
 
 
 class Variations:
+    """
+    Variations - Class
+
+    Constructs a polygon with a transformation which can be called to alter the polygon.
+    Attributes
+        x,y - lists of points
+        name - name of the transformation
+    """
     def __init__(self, x, y, name):
         """
         Construct Variations class with transform function
