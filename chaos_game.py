@@ -12,8 +12,6 @@ class ChaosGame:
         ----------
         n : int
         r : float
-
-
         """
         assert isinstance(n, int), "n has to be an integer"
         assert isinstance(r, float), "r has to be a float"
@@ -85,7 +83,7 @@ class ChaosGame:
 
     def show(self, color=False, cmap="jet"):
         self.plot(color=color, cmap=cmap)
-        plt.show()
+        # plt.show()
 
     @property
     def gradient_color(self):
@@ -109,7 +107,7 @@ class ChaosGame:
 
 
 if __name__ == "__main__":
-    c = ChaosGame(5, r=1 / 3)
+    c = ChaosGame(n=3, r=1 / 2)
     c.iterate(10000)
     c.show(color=True)
-    # c.savepng("outfile")
+    c.savepng("chaos1", color=True)
